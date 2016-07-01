@@ -1,0 +1,168 @@
+import java.util.Scanner;
+public class Customers
+{
+	private int code;
+	private String name;
+	private String surname;
+	private String adress;
+	private int card_code;
+	private int telephone;
+	private double points; //οι πόντοι δηλώνονται ως double γιατί σε κάθε άλλοι περίπτωση "χτυπάει" για την διαίρεση του συνολικού ποσού με το 3 ότι δεν γίνεται μετατροπή απο int σε double
+
+
+	static Customers[] customersArray=new Customers[20];
+
+	static int counter_customers=0;
+	public Customers(String name, String surname, String adress, int telephone, double points)
+	{
+		customersArray[counter_customers]=this;
+		counter_customers++;
+		this.name=name;
+		this.surname=surname;
+		this.adress=adress;
+		this.telephone=telephone;
+		this.card_code=counter_customers+100; //ο κωδικός της κάρτας πόντων είναι αυτός του πελάτη αυξημένος κατά 100
+		this.code=counter_customers;
+		this.points=points;
+
+	}
+
+	public void setName(String name)
+	{
+		this.name=name;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setSurname(String surname)
+	{
+		this.surname=surname;
+	}
+
+	public String getSurname()
+	{
+		return surname;
+	}
+
+	public void setAdress(String adress)
+	{
+		this.adress=adress;
+	}
+
+	public String getAdress()
+	{
+		return adress;
+	}
+
+	public void setTelephone(int telephone)
+	{
+		this.telephone=telephone;
+	}
+
+	public int getTelephone()
+	{
+		return telephone;
+	}
+
+	public int getCardCode()
+	{
+		return card_code;
+	}
+
+    public void setPoints(double points)
+    {
+		this.points+=points;
+	}
+
+	public double getPoints()
+	{
+		return points;
+	}
+
+	public int getCode()
+	{
+		return code;
+    }
+
+    public String toString()
+    {
+		return "Customer [name=" + name + ", surname=" + surname + ", adress=" + adress + ", telephone=" + telephone + ", card_code=" + card_code + ", points=" + points + ", code=" + code +  "]";
+	}
+
+	public static int existanceOfCardCode(int kwdikoskartas)
+	{
+		int existance=0;
+		for(int i=0; i<customersArray.length; i++)
+		{
+			if (customersArray[i]!=null) {
+				if (customersArray[i].getCardCode()==kwdikoskartas)
+				   existance=1;
+			   }
+		   }
+		   return existance;
+	   }
+
+	public static void handlingOfPoints(int kwdikos, double poso)
+	{
+		int theshpelath=0;
+		double pontoi;
+		for(int i=0; i<customersArray.length; i++)
+		{
+			if (customersArray[i]!=null) {
+				if (customersArray[i].getCardCode()==kwdikos)
+				    theshpelath=i;
+			   }
+		}
+		pontoi=poso/3;
+		customersArray[theshpelath].setPoints(pontoi);
+		if (customersArray[theshpelath].getPoints()>=200)
+		{
+			System.out.println("Sygxarhthria! Kerdiaste mia dwroepitagh!");
+			pontoi=-200;
+			customersArray[theshpelath].setPoints(pontoi);
+		}
+	}
+
+    public static void printCustomers()
+    {
+		for(int i=0; i<customersArray.length; i++) {
+			if(customersArray[i]!=null)
+			   System.out.println(customersArray[i].toString());
+		   }
+    }
+
+    public static void insertCustomer()
+    {
+		Scanner input=new Scanner(System.in);
+		String name1;
+		String surname1;
+		String adress1;
+		int telephone1;
+		System.out.println("Eisagete to onoma tou pelath\n\n");
+		name1=input.next();
+		System.out.println("Eisagete to epwnumo tou pelath\n\n");
+		surname1=input.next();
+		System.out.println("Eisagete thn dieuthinsh tou pelath\n\n");
+		adress1=input.next();
+		System.out.println("Eisagete to thlefwno tou pelath\n\n");
+		telephone1=input.nextInt();
+
+		customersArray[counter_customers]=new Customers(name1, surname1, adress1, telephone1, 0);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
