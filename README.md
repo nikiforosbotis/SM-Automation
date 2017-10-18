@@ -1,5 +1,4 @@
 # SM-Automation
-Supermarket checkout activities automation 
+Supermarket checkout activities automation
 
-This repository contains the source code of the exercises I was required to implement in the module "Java I". There are both some numerical exercises in order to acquire some first experience and then the main exercise.
-The main exercise is about automating the checkout on supermarkets by printing the customer's receipts relatively to the products that they have purchased.
+This repository contains the source code of some numerical exercises (in Java) and  a Java project (SM-Automation) that automates the checkout procedure on supermarkets by printing the customer's receipts according to the products that have been purchased.
