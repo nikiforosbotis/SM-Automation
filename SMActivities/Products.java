@@ -61,24 +61,24 @@ public class Products
 		return "Product [name=" + name + ", weight=" + weight + ", price=" + price + ", code=" + code + "]";
     }
 
-    public static void printProduct(int kwdikos)
+    public static void printProduct(int number)
     {
 		for(i=0; i<productsArray.length; i++)
 		{
 			if(productsArray[i]!=null) {
-			if(productsArray[i].getCode()==kwdikos)
+			if(productsArray[i].getCode()==number)
 			   System.out.println(productsArray[i].toString());
 		   }
 		}
 	}
 
-	public static int existanceOfCode(int kwdikos)
+	public static int existanceOfCode(int number)
 	{
 		int existance=0;
 		for(i=0; i<productsArray.length; i++)
 		{
 			if(productsArray[i]!=null) {
-			if(productsArray[i].getCode()==kwdikos)
+			if(productsArray[i].getCode()==number)
 			existance=1;
 		}
 	    }
@@ -88,37 +88,37 @@ public class Products
 	public static void printOfAllSales()
 	{
 		Scanner input=new Scanner(System.in);
-		int minas;
-		int xronos;
+		int month;
+		int year;
 		int [][] totalcodesquantities=new int[20][2];
 		int realsize=0;
 
 		for(int k=0; k<totalcodesquantities.length; k++)
 		{
 			if(productsArray[k]!=null) {
-			totalcodesquantities[k][0]=productsArray[k].getCode(); //βάζουμε στην 1η στήλη του πίνακα με τις συνολικές πωλήσεις ανα κωδικό για τη συγκεκριμένη χρονική περίοδο, τον κωδικό όλων των καταχωρημένων προιόντων
-			totalcodesquantities[k][1]=0; //μηδενίζουμε αρχικά την ποσότητα στην 2η στήλη
+			totalcodesquantities[k][0]=productsArray[k].getCode();
+			totalcodesquantities[k][1]=0;
 			realsize++;
 		}
 		}
 
-		System.out.println("Dose ton mhna pou se endiaferei\n\n");
+		System.out.println("Enter the month that you are interested in: \n\n");
 		do {
-		minas=input.nextInt();
-		} while(minas<1 || minas>12);
-		System.out.println("Dose ton xrono pou se endiaferei\n\n");
+		month=input.nextInt();
+		} while(month<1 || month>12);
+		System.out.println("Enter the year you are interested in: \n\n");
 		do {
-	    xronos=input.nextInt();
-	    } while(xronos<0);
+	    year=input.nextInt();
+	    } while(year<0);
 
 	    for(int i=0; i<Receipts.receiptsArray.length; i++)
 	    {
 			if(Receipts.receiptsArray[i]!=null) {
-			if(Receipts.receiptsArray[i].getYear()==xronos)
+			if(Receipts.receiptsArray[i].getYear()==year)
 			{
-				if(Receipts.receiptsArray[i].getMonth()==minas)
+				if(Receipts.receiptsArray[i].getMonth()==month)
 				{
-					for(int l=0; l<=Receipts.receiptsArray[i].getCountercq(); l++) //η getter getCountercq() επιστρέφει το μέγεθος του δισδιάστατου πίνακα
+					for(int l=0; l<=Receipts.receiptsArray[i].getCountercq(); l++)
 					{
 						totalcodesquantities[Receipts.receiptsArray[i].getCodesQuantities1(l)-1][1]+=Receipts.receiptsArray[i].getCodesQuantities2(l);
 				    }
@@ -127,8 +127,8 @@ public class Products
 	    }
 	   }
 
-	   System.out.println("To diasthma auto pragmatopoihthikan oi akolouthes pwlhseis proiontwn:\n\n");
-	   System.out.println("Kwdikos proiontos:       Pwlhseis:\n\n");
+	   System.out.println("In the specified time interval, the following product sales were executed:\n\n");
+	   System.out.println("Product number:       Sales:\n\n");
 	   for(int i=0; i<realsize; i++)
 	   {
 		   System.out.println((productsArray[totalcodesquantities[i][0]-1].getName()) + "                            " + totalcodesquantities[i][1] + "\n\n");

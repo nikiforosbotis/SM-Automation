@@ -1,6 +1,6 @@
 public class Cashemployee extends Employee
 {
-	protected String kind; //είδος απασχόλησης με τιμές fulltime ή partime (χωρίς κενα)
+	protected String kind;
 	protected int overtime;
 
 	public Cashemployee(String e_name, String e_surname, int married, String username, int password, String kind, int overtime)
@@ -30,13 +30,5 @@ public class Cashemployee extends Employee
 		return super.calculateSalary()+salary;
 
 	}
-
-
-
-
-
-
-
-
 
 }
