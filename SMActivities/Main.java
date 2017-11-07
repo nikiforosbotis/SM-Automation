@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class Main
 {
 
-
 	public static void main( String[] args )
 	{
 		new Cashemployee("Giorgos", "Papadopoulos", 1, "gpap", 12345, "fulltime", 4);
@@ -19,7 +18,7 @@ public class Main
 		int answer=1;
 		int counter=0;
 		int choice=-1;
-    int elegxos=-1;
+    int control=-1;
 
 		Scanner input=new Scanner(System.in);
 
@@ -27,60 +26,61 @@ public class Main
 
 		answer=1;
 		counter=0;
-		System.out.println("Prepei na eisagete toulaxiston 2 pelates prin ksekinisei i diadikasia.Gia na eisagetai neo pelath pathste 1. Gia na stamathsete thn eisagwgh pathste 0\n\n");
+		System.out.println("You should enter at least 2 customers before the procedure start"
+		+ "In order to enter a new customer, please press 1. If you wish to stop the procedure of "
+		+ "registering the new customer, please press 0 \n\n");
 
 		while (answer==1)
 		{
-			System.out.println("Eisagete to onoma tou pelath\n\n");
+			System.out.println("Enter the name of the customer \n\n");
 			name2=input.next();
-			System.out.println("Eisagete to epwnumo tou pelath\n\n");
+			System.out.println("Enter the surname of the customer \n\n");
 			surname=input.next();
-			System.out.println("Eisagete thn dieuthinsh tou pelath\n\n");
+			System.out.println("Enter the address of the customer \n\n");
 			adress=input.next();
-			System.out.println("Eisagete to thlefwno tou pelath\n\n");
+			System.out.println("Enter the address of the customer \n\n");
 			telephone=input.next();
 			Customers.customersArray[Customers.counter_customers]=new Customers(name2, surname, adress, telephone, 0);
 			counter++;
-			System.out.println("Thelete na eisagete neo pelath?\n\n");
+			System.out.println("Do you want to add a new customer? \n\n");
 			answer=input.nextInt();
 			if (counter<2 && answer==0)
 			{
-				System.out.printf("Prepei na eisagete toulaxiston 2 pelates, dhladh akoma toulaxiston %d\n\n", 2-counter);
+				System.out.printf("You should add at least 2 customers, this means you still have to enter: %d\n\n", 2-counter);
 				answer=1;
 			}
 		}
 
-		while(elegxos==-1) {
-			System.out.println("Doste to username\n\n");
+		while(control==-1) {
+			System.out.println("Enter your username \n\n");
 			String username1=input.next();
-			System.out.println("Eisagete to password\n\n");
+			System.out.println("Enter your password\n\n");
 			int password1=input.nextInt();
 
-			elegxos=Employee.controlUsernamePass(username1, password1);
-			if(elegxos!=-1)
+			control=Employee.controlUsernamePass(username1, password1);
+			if(control!=-1)
 			{
-				if(Employee.employeeArray[elegxos] instanceof Cashemployee)
+				if(Employee.employeeArray[control] instanceof Cashemployee)
 				{
 					while(choice!=0)
 					{
 					System.out.println("----MENU-----\n"+
-					       "1.Ektupwsh xarakthristikwn proiontos\n"+
-					       "2.Kataxwrhsh neou pelath\n"+
-					       "3.Plhrwmh proiontwn sto tameio\n");
+					       "1.Print product's characteristics\n"+
+					       "2.Register a new customer\n"+
+					       "3.Pay product in the cashier\n");
 					choice=input.nextInt();
 
-
 			if (choice==1) 			{
-				int kwdikos;
+				int password;
 				int status=0;
 				while (status==0) {
-				System.out.println("Dose ton kwdiko tou proiontos tou opoiou theleis ta xarakthristika\n\n");
-			    kwdikos=input.nextInt();
-				if (Products.existanceOfCode(kwdikos)==1) {
-					Products.printProduct(kwdikos);
+				System.out.println("Enter the product's code for which you want to see its characteristics \n\n");
+			    password=input.nextInt();
+				if (Products.existanceOfCode(password)==1) {
+					Products.printProduct(password);
 					status=1; }
 			    else {
-			        System.out.println("O kwdikos pou dosate den antistoixei se kapoio proion. Parakalw eisagete ksana.\n\n");
+			        System.out.println("The given password does not match with any product code. Please try again.\n\n");
 				}
 			 }
 		   }
@@ -88,7 +88,7 @@ public class Main
 		   if (choice==2)
 		   {
 			   Customers.insertCustomer();
-			   System.out.println("H kataxwrhsh tou neou pelath oloklirwthike me epityxia!\n\n");
+			   System.out.println("The product's registration was successful!\n\n");
 		   }
 
 		   if (choice==3)
@@ -102,9 +102,9 @@ public class Main
 		   {
 
 	          System.out.println("-----MENU-----\n"+
-	                "1.Ektupwsh olwn twn kataxwrhmenwn pelatwn\n"+
-	                "2.Ektupwsh kai eggrafh se txt olwn twn kataxwrhmenwn ypallhlwn\n"+
-	                "3.Ektupwsh twn mhniaiwn pwlhsewn kathe kataxwrhmenou proiontos\n");
+	                "1.Print all the registered customers. \n"+
+	                "2.Print and extract as .txt all the registered employees. \n"+
+	                "3.Print the monthly sales for each registered product. \n");
 	         choice=input.nextInt();
 
 		      if (choice==1)
@@ -124,18 +124,16 @@ public class Main
 
 	      }
       }
-
-
-	    }
+		}
 	   else
-	   System.out.println("Ta stoixeia pou dosate einai lanthasmena.Parakalw, prospathiste ksana\n\n");
+	   System.out.println("The credential that you gave are not correct. Please try again. \n\n");
    }
 }
 
    public static void readProducts()
    {
 	   try{
-		      FileInputStream fstream= new FileInputStream("Proionta.txt");
+		      FileInputStream fstream= new FileInputStream("Products.txt");
 		      DataInputStream in= new DataInputStream(fstream);
 		      BufferedReader br=new BufferedReader(new InputStreamReader(in));
 		      String line;
@@ -151,7 +149,7 @@ public class Main
 				  new Products(name, weight, price);
 			  }
 			  in.close();
-			  System.out.println("To diavasma proiontwn oloklirothike epitixws!\n\n");
+			  System.out.println("The procut's parsing has finished successfully. \n\n");
 
 		  }
 		  catch(Exception ex) {

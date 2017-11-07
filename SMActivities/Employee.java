@@ -9,7 +9,7 @@ public class Employee
 	protected int employee_code;
 	protected String e_name;
 	protected String e_surname;
-	protected int married; //υποθέτουμε ότι αν είναι παντρεμένος η μεταβλητή θα έχει την τιμή 1, αλλιώς την τιμή 0
+	protected int married;
 	protected String username;
 	protected int password;
 
